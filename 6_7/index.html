@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>My Page</title>
+    <script>
+        // 为所有字符节点添加默认属性和样式
+        Node.prototype.setStyleAndAttributeDefault = function (attrName, attrValue, styleName, styleValue) {
+            if (this.nodeType === Node.ELEMENT_NODE || this.nodeType === Node.TEXT_NODE) {
+                if (!this.hasAttribute(attrName)) {
+                    this.setAttribute(attrName, attrValue);
+                }
+                this.style[styleName] = styleValue;
+            }
+            for (var i = 0; i < this.childNodes.length; i++) {
+                this.childNodes[i].setStyleAndAttributeDefault(attrName, attrValue, styleName, styleValue);
+            }
+        };
+
+        // 设置默认属性和样式
+        window.onload = function () {
+            document.documentElement.setStyleAndAttributeDefault("lang", "en", "fontFamily", "'YouYuan', Arial, sans-serif", "color", "red");
+        };
+    </script>
+</head>
+
+<body>
+    <p>Hello, world!</p>
+    <p>This is my page.</p>
+</body>
+
+</html>
